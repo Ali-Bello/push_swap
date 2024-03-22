@@ -182,29 +182,43 @@ void    rrb(t_stack **a)
     write(1, "rrb\n", 4);
 }
 
-void	sort_a_less(t_stack *stack, int max)
+int find_min(t_stack *b)
 {
-    if (stack->value == max)
-        ra(&stack);
-    else if (stack->next->value == max)
-        rra(&stack);
-    if (stack->value > stack->next->value)
-        sa(&stack);
-}
-void	sort_b_less(t_stack *stack, int max)
-{
-  if (stack->value == max)
-  {
+  int min;
 
+  min = b->value;
+  while (b)
+  {
+    if (b-> value < min)
+      min = b->value;
+    b = b->next;
   }
-  if (stack->value != max)
-    rb(&stack);
-  else if (stack->value-)
+  return (min);
+}
+
+void	sort_a_less(t_stack **stack, int max)
+{
+  printf("max = %d\n", max);
+    if ((*stack)->value == max)
+        ra(stack);
+    else if ((*stack)->next->value == max)
+        rra(stack);
+    if ((*stack)->value > (*stack)->next->value)
+        sa(stack);
+}
+void	sort_b_less(t_stack *stack, int min)
+{
+    if (stack->value == min)
+        rb(&stack);
+    else if (stack->next->value == min)
+        rrb(&stack);
+    if (stack->value < stack->next->value)
+        sb(&stack);
 }
 void	ft_sort_b(t_stack *b, t_stack *a, t_info *info)
 {
 	int	max;
-	int i;
+  t_stack *tmp, *tmp2;
 
 	while(info->b_len > 3)
 	{
@@ -213,13 +227,25 @@ void	ft_sort_b(t_stack *b, t_stack *a, t_info *info)
 			rb(&b);
 		pa(&a, &b, info);
 	}
-	sort_b_less(&b, max);
-	i = 0;
-	while (i < 3)
-	{
-	    pa(&a, &b, info);
-	    i++;
-	}
+  tmp = a;
+  printf("-----stack a----\n");
+  while (tmp)
+  {
+    printf("[%d]\n", tmp->value);
+    tmp = tmp->next;
+  }
+  printf("----------------\n");
+
+	sort_b_less(b, find_min(b));
+  tmp2 = b;
+  printf("-----stack b----\n");
+  while (tmp2)
+  {
+    printf("[%d]\n", tmp2->value);
+    tmp2 = tmp2->next;
+  }
+  printf("----------------\n");
+  pa(&a, &b, info);
 }
 
 void	ft_sort(t_stack *a, t_stack *b, t_info *info)
@@ -243,11 +269,8 @@ void	ft_sort(t_stack *a, t_stack *b, t_info *info)
 		}
 		median(array + info->med_idx, info->a_len, info);
 	}
-
-	sort_a_less(a, find_max(a));
+	sort_a_less(&a, find_max(a));
 	ft_sort_b(b, a, info);
-
-
 }
 
 void  add_node(t_stack **a, t_stack *new, t_info *info)
@@ -304,7 +327,6 @@ int main() {
 
 /**
  * TODO: implement sort_b_less correctly;
- *       fix the loss of addres;
  *       implement the finding function;
  *       parsing part;
 */
