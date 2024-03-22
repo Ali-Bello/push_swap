@@ -193,6 +193,10 @@ void	sort_a_less(t_stack *stack, int max)
 }
 void	sort_b_less(t_stack *stack, int max)
 {
+  if (stack->value == max)
+  {
+
+  }
   if (stack->value != max)
     rb(&stack);
   else if (stack->value-)
@@ -298,3 +302,9 @@ int main() {
   return 0;
 }
 
+/**
+ * TODO: implement sort_b_less correctly;
+ *       fix the loss of addres;
+ *       implement the finding function;
+ *       parsing part;
+*/
