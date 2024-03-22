@@ -6,7 +6,7 @@
 /*   By: aderraj <aderraj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 15:16:33 by aderraj           #+#    #+#             */
-/*   Updated: 2024/03/21 00:33:53 by aderraj          ###   ########.fr       */
+/*   Updated: 2024/03/22 06:21:36 by aderraj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,31 +53,74 @@ void	put_array(t_stack *a, int *array)
 	}
 }
 
-void	ft_sort(t_stack *a, t_stack *b , t_info *info)
+void	ft_sort(t_stack *a, t_stack *b)
 {
 	int	med;
 	int	*array;
 
-	array = malloc(sizeof(int) * info->len);
+	array = malloc(sizeof(int) * a->len);
 	put_array(a, array);
-	array_sort(array, info->len - 1);
-	med = median(array, info->len);
-	while (info->len > 3)
+	array_sort(array, a->len - 1);
+	med = median(array, a->len);
+	while (a->len > 2)
 	{
-		while (info->npb <= med)
+		while (b->npb < med)
 		{
 			if (a->value <= med)
-				pb(&a, &b, info);
+				pb(&a, &b);
 			else
 				ra(&a);
 		}
-		med = median(array + med, info->len);
+		med = median(array + med, a->len);
 	}
+	sort_2(a);
+	ft_sort_b(b, a);
 }
 
+int	find_max(t_stack *stack)
+{
+	int	max;
+
+	max = stack->value;
+	while (stack)
+	{
+		if (stack->value > max)
+			max = stack->value;
+		stack = stack->next;
+	}
+	return (max);
+}
+
+void	ft_sort_b(t_stack *b, t_stack *a)
+{
+	int	max;
+
+	while(b->len > 2)
+	{
+		max = find_max(b);
+		while (b->value != max)
+			rb(&b);
+		pa(&a, &b);
+	}
+	sort_2(b);
+	pa(&a, &b);
+	pa(&a, &b);
+}
+
+void	sort_2(t_stack *stack)
+{
+	void	(*function)(t_stack **);
+
+	if (stack->name == 'a')
+		function = &sa;
+	else
+		function = &sb;
+	if (stack->value > stack->next->value)
+		function(&stack);
+}
 /**
- * TODO: -implement the shortest path finder function;
- * 		 -implement the sort B function;
- *  	 -implement the sort 3 elements function;
+ * TODO: -implement the sort B function;
+ * 		 -implement the sort 3 elements function;
+ * 		 -implement the shortest path finder function;
  *		 [THE PARSING PART];
 */

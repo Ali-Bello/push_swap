@@ -6,7 +6,7 @@
 /*   By: aderraj <aderraj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 10:33:10 by aderraj           #+#    #+#             */
-/*   Updated: 2024/03/21 00:12:57 by aderraj          ###   ########.fr       */
+/*   Updated: 2024/03/22 06:18:52 by aderraj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,13 @@ typedef struct s_stack
 {
 	int	value;
 	int	idx;
+	int	len;
+	int	npb;
+	char	name;
 	struct s_stack	*next;
 } t_stack;
 
-typedef struct s_info
-{
-	int	len;
-	int	min;
-	int	max;
-	int	npb;
-} t_info;
 
+void	sb(t_stack	**b);
+void	sa(t_stack	**a);
 #endif

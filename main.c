@@ -3,16 +3,18 @@
 #include <unistd.h>
 typedef struct s_stack
 {
-    int    value;
-    struct s_stack   *next;
+	int	value;
+	int	idx;
+	struct s_stack	*next;
 } t_stack;
 
 typedef struct s_info
 {
-    int    len;
-    int    min;
-    int    max;
-    int    npb;
+    int	a_len;
+    int	b_len;
+    int	npb;
+	int	med;
+	int	med_idx;
 } t_info;
 
 void    array_sort(int *array, int size)
@@ -37,12 +39,18 @@ void    array_sort(int *array, int size)
     }
 }
 
-int    median(int    *array, int size)
+void	median(int	*array, int size, t_info *info)
 {
-    if (size % 2 == 0)
-        return ((array[size / 2 - 1] + array[size / 2]) / 2);
-    else
-        return (array[size / 2]);
+	if (size % 2 == 0)
+	{
+		info->med = (array[size / 2 - 1] + array[size / 2]) / 2;
+		info->med_idx += size / 2 - 1;
+	}
+	else
+	{
+		info->med =  (array[size / 2]);
+		info->med_idx += size / 2 ;
+	}
 }
 void    put_array(t_stack *a, int *array)
 {
@@ -65,10 +73,36 @@ void    ra(t_stack **a)
     tmp->next = (*a);
     (*a) = (*a)->next;
     tmp->next->next = 0;
-    write(1, "ra", 2);
+    write(1, "ra\n", 3);
 }
 
-void    pb(t_stack **a, t_stack **b, t_info *info)
+void    rb(t_stack **b)
+{
+    t_stack *tmp;
+
+    tmp = *b;
+    while (tmp && tmp->next)
+        tmp = tmp->next;
+    tmp->next = (*b);
+    (*b) = (*b)->next;
+    tmp->next->next = 0;
+    write(1, "rb\n", 3);
+}
+
+void	pa(t_stack **a, t_stack **b, t_info *info)
+{
+	t_stack	*tmp;
+
+	tmp = *b;
+	*b = (*b)->next;
+	tmp->next = *a;
+	*a = tmp;
+	info->a_len++;
+	info->b_len--;
+	write(1, "pa\n", 3);
+}
+
+void	pb(t_stack **a, t_stack **b, t_info *info)
 {
   t_stack *tmp;
 
@@ -76,31 +110,140 @@ void    pb(t_stack **a, t_stack **b, t_info *info)
   *a = (*a)->next;
   tmp->next = *b;
   *b = tmp;
-  info->len--;
-  info->npb++;
-  write(1, "pb", 2);
+	info->a_len--;
+	info->b_len++;
+	info->npb++;
+  write(1, "pb\n", 3);
+}
+void	sa(t_stack	**a)
+{
+    int tmp;
+
+    tmp = (*a)->value;
+    (*a)->value = (*a)->next->value;
+    (*a)->next->value = tmp;
+    write(1, "sa\n", 3);
 }
 
-void    ft_sort(t_stack *a, t_stack *b , t_info *info)
+void	sb(t_stack	**b)
 {
-    int    med;
-    int    *array;
+    int tmp;
 
-    array = malloc(sizeof(int) * info->len);
-    put_array(a, array);
-    array_sort(array, info->len - 1);
-    med = median(array, info->len);
-    while (info->len > 3)
+    tmp = (*b)->value;
+    (*b)->value = (*b)->next->value;
+    (*b)->next->value = tmp;
+    write(1, "sb\n", 3);
+}
+
+int	find_max(t_stack *stack)
+{
+	int	max;
+
+	max = stack->value;
+	while (stack)
+	{
+		if (stack->value > max)
+			max = stack->value;
+		stack = stack->next;
+	}
+	return (max);
+}
+
+void    rra(t_stack **a)
+{
+    t_stack *tmp;
+
+    tmp = *a;
+    while (tmp && tmp->next)
     {
-        while (info->npb <= med)
-        {
-            if (a->value <= med)
-                pb(&a, &b, info);
-            else
-                ra(&a);
-        }
-        med = median(array + med, info->len);
+      if (!(tmp->next->next))
+        break;
+      tmp = tmp->next;
     }
+    tmp->next->next = (*a);
+    (*a) = tmp->next;
+    tmp->next = 0;
+    write(1, "rra\n", 4);
+}
+void    rrb(t_stack **a)
+{
+    t_stack *tmp;
+
+    tmp = *a;
+    while (tmp && tmp->next)
+    {
+      if (!(tmp->next->next))
+        break;
+      tmp = tmp->next;
+    }
+    tmp->next->next = (*a);
+    (*a) = tmp->next;
+    tmp->next = 0;
+    write(1, "rrb\n", 4);
+}
+
+void	sort_a_less(t_stack *stack, int max)
+{
+    if (stack->value == max)
+        ra(&stack);
+    else if (stack->next->value == max)
+        rra(&stack);
+    if (stack->value > stack->next->value)
+        sa(&stack);
+}
+void	sort_b_less(t_stack *stack, int max)
+{
+  if (stack->value != max)
+    rb(&stack);
+  else if (stack->value-)
+}
+void	ft_sort_b(t_stack *b, t_stack *a, t_info *info)
+{
+	int	max;
+	int i;
+
+	while(info->b_len > 3)
+	{
+		max = find_max(b);
+		while (b->value != max)
+			rb(&b);
+		pa(&a, &b, info);
+	}
+	sort_b_less(&b, max);
+	i = 0;
+	while (i < 3)
+	{
+	    pa(&a, &b, info);
+	    i++;
+	}
+}
+
+void	ft_sort(t_stack *a, t_stack *b, t_info *info)
+{
+	int	*array;
+  t_stack *tmp;
+
+	array = malloc(sizeof(int) * info->a_len);
+	put_array(a, array);
+	array_sort(array, info->a_len - 1);
+	info->med_idx = 0;
+	median(array, info->a_len, info);
+	while (info->a_len > 3)
+	{
+		while (info->npb <= info->med)
+		{
+			if (a->value <= info->med)
+				pb(&a, &b, info);
+			else
+				ra(&a);
+		}
+		median(array + info->med_idx, info->a_len, info);
+	}
+
+	sort_a_less(a, find_max(a));
+	ft_sort_b(b, a, info);
+
+
 }
 
 void  add_node(t_stack **a, t_stack *new, t_info *info)
@@ -115,7 +258,7 @@ void  add_node(t_stack **a, t_stack *new, t_info *info)
   else
     last->next = new;
   new->next = 0;
-  info->len++;
+  info->a_len++;
 }
 
 void create_stack(t_stack **head, t_info *info)
@@ -126,7 +269,7 @@ void create_stack(t_stack **head, t_info *info)
   t_stack *a = malloc(sizeof(t_stack));
   t_stack *b = malloc(sizeof(t_stack));
   t_stack *c = malloc(sizeof(t_stack));
-  *head = 0;
+
   x->value = 5;
   y->value = 4;
   z->value = 3;
@@ -140,15 +283,18 @@ void create_stack(t_stack **head, t_info *info)
   add_node(head, b, info);
   add_node(head, c, info);
 }
-
 int main() {
 
   t_stack *a, *b;
   t_info info;
-  info.len = 0;
-  info.npb = 0;
-  b = 0;
+    a = 0;
+    b = 0;
+
+    info.a_len = 0;
+    info.b_len = 0;
+    info.npb = 0;
   create_stack(&a, &info);
   ft_sort(a, b, &info);
   return 0;
 }
+
