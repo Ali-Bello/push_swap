@@ -6,7 +6,7 @@
 /*   By: aderraj <aderraj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 15:16:33 by aderraj           #+#    #+#             */
-/*   Updated: 2024/03/23 07:58:48 by aderraj          ###   ########.fr       */
+/*   Updated: 2024/03/23 08:32:47 by aderraj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,8 @@ void	ft_sort(t_stack **a, t_stack **b, t_info *info)
 	int	*array;
 
 	array = malloc(sizeof(int) * info->a_len);
+	if (!array)
+		return (free_stack(a), free_stack(b));
 	put_array(*a, array);
 	array_sort(array, info->a_len - 1);
 	info->med_idx = 0;
@@ -145,11 +147,11 @@ void	ft_sort(t_stack **a, t_stack **b, t_info *info)
 	}
 	sort_a_less(a, find_max(*a));
 	ft_sort_b(b, a, info);
+	free(array);
 }
 
 /**
- * TODO: -implement the sort B function;
- * 		 -implement the sort 3 elements function;
- * 		 -implement the shortest path finder function;
- *		 [THE PARSING PART];
+ * TODO: -shortest path finder;
+ * 		 -where the algo do more moves;
+ * 		 error handling;
 */
