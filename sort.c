@@ -6,32 +6,31 @@
 /*   By: aderraj <aderraj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 15:16:33 by aderraj           #+#    #+#             */
-/*   Updated: 2024/03/23 08:32:47 by aderraj          ###   ########.fr       */
+/*   Updated: 2024/03/24 08:02:14 by aderraj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void    array_sort(int *array, int size)
+void	array_sort(int *array, int size)
 {
-    int	i, j, tmp;
+	int	i;
+	int	key;
+	int	j;
 
-    i = 0;
-    while (i < size)
-    {
-        j = i + 1;
-        while (j <= size)
-        {
-            if (array[i] > array[j])
-            {
-                tmp = array[i];
-                array[i] = array[j];
-                array[j] = tmp;
-            }
-            j++;
-        }
-        i++;
-    }
+	i = 1;
+	while (i < size)
+	{
+		key = array[i];
+		j = i - 1;
+		while (j >= 0 && array[j] > key)
+		{
+			array[j + 1] = array[j];
+			j = j - 1;
+		}
+		array[j + 1] = key;
+		i++;
+	}
 }
 
 void	median(int	*array, int size, t_info *info)
@@ -125,15 +124,13 @@ void	ft_sort_b(t_stack **b, t_stack **a, t_info *info)
 
 void	ft_sort(t_stack **a, t_stack **b, t_info *info)
 {
-	int	*array;
-
-	array = malloc(sizeof(int) * info->a_len);
-	if (!array)
+	info->array = malloc(sizeof(int) * info->a_len);
+	if (!info->array)
 		return (free_stack(a), free_stack(b));
-	put_array(*a, array);
-	array_sort(array, info->a_len - 1);
+	put_array(*a, info->array);
+	array_sort(info->array, info->a_len - 1);
 	info->med_idx = 0;
-	median(array, info->a_len, info);
+	median(info->array, info->a_len, info);
 	while (info->a_len > 3)
 	{
 		while (info->npb < info->med_idx + 1)
@@ -143,13 +140,49 @@ void	ft_sort(t_stack **a, t_stack **b, t_info *info)
 			else
 				ra(a);
 		}
-		median(array + info->med_idx, info->a_len, info);
+		median(info->array + info->med_idx, info->a_len, info);
 	}
 	sort_a_less(a, find_max(*a));
 	ft_sort_b(b, a, info);
-	free(array);
+	free(info->array);
+}
+int	is_inRange(int value, t_info *info)
+{
+	int	i;
+
+	i = 0;
+	while (i < info->a_len)
+	{
+		if (info->array[i] == value)
+			return (1);
+		i++;
+	}
+	return (0);
 }
 
+void	best_move(t_stack **a, t_stack **b , t_info *info)
+{
+	t_stack	*tmp, *last;
+
+	tmp = *a;
+	last = *b;
+	while (last)
+		last = last->next;
+	while ()
+	{
+		if (is_inRange(tmp->value, info))
+		{
+			pb(a, b, info);
+			tmp = tmp->next;
+		}
+		else if (is_inRange(last->value, info))
+		{
+			rra(a);
+			pa(a, b, info);
+			last = last->prev;
+		}
+	}
+}
 /**
  * TODO: -shortest path finder;
  * 		 -where the algo do more moves;

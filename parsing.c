@@ -6,7 +6,7 @@
 /*   By: aderraj <aderraj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 06:56:44 by aderraj           #+#    #+#             */
-/*   Updated: 2024/03/23 07:59:33 by aderraj          ###   ########.fr       */
+/*   Updated: 2024/03/24 06:07:50 by aderraj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,23 @@ int	ft_atoi(const char *str)
 
 void  add_node(t_stack **a, t_stack **new, t_info *info)
 {
-	t_stack *last;
+    t_stack *last;
 
-	last = *a;
-	while (last && last->next)
-		last = last->next;
-	if (!last)
-		*a = *new;
-	else
-		last->next = *new;
-	(*new)->next = 0;
-	info->a_len++;
+    last = *a;
+    while (last && last->next)
+        last = last->next;
+    if (!last)
+    {
+        *a = *new;
+        (*a)->prev = NULL;
+    }
+    else
+    {
+        last->next = *new;
+        (*new)->prev = last;
+    }
+    (*new)->next = 0;
+    info->a_len++;
 }
 
 void	create_stack(t_stack **head, int len, t_info *info)
@@ -83,7 +89,7 @@ void	parse(int ac, char **av, t_stack **head, t_info *info)
 }
 void	free_stack(t_stack **head)
 {
-	t_stack *tmp;
+	t_stack	*tmp;
 
 	while (*head)
 	{
