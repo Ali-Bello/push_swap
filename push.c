@@ -34,7 +34,9 @@ void	pb(t_stack **a, t_stack **b, t_info *info)
 
 	tmp = *a;
 	*a = (*a)->next;
+	(*a)->prev = 0;
 	tmp->next = *b;
+	tmp->prev = 0;
 	*b = tmp;
 	info->a_len--;
 	info->b_len++;

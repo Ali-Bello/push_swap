@@ -6,6 +6,7 @@ int main(int ac, char **av)
 	t_stack	*b;
 	t_info	info;
 
+	a = 0;
 	b = 0;
 	info.a_len = 0;
 	info.b_len = 0;
@@ -15,8 +16,3 @@ int main(int ac, char **av)
 	ft_sort(&a, &b, &info);
 	free_stack(&a);
 }
-/**
- * TODO: - shortest path finder;
- * 		 - error handling;
- *		 - optimization;
-*/

@@ -32,6 +32,8 @@ typedef struct s_info
 	int	*array;
 	int	med;
 	int	med_idx;
+	int nr;
+	int nrr;
 } t_info;
 
 void	ra(t_stack **a);
