@@ -38,7 +38,7 @@ int	ft_atoi(const char *str)
 	return ((int)(result * sign));
 }
 
-void  add_node(t_stack **a, t_stack **new, t_info *info)
+void	add_node(t_stack **a, t_stack **new, t_info *info)
 {
     t_stack *last;
 

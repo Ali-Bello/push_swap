@@ -48,4 +48,10 @@ void	pb(t_stack **a, t_stack **b, t_info *info);
 void	ft_sort(t_stack **a, t_stack **b, t_info *info);
 void	parse(int ac, char **av, t_stack **head, t_info *info);
 void	free_stack(t_stack **head);
+int 	find_min(t_stack *b);
+int		find_max(t_stack *stack);
+void    put_array(t_stack *a, t_info *info);
+void	median(int	*array, int size, t_info *info);
+void	array_sort(int *array, int size);
+
 #endif

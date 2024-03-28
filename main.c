@@ -3,7 +3,7 @@
 int main(int ac, char **av)
 {
 	t_stack	*a;
-	t_stack	*b;
+	t_stack	*b, *tmp;
 	t_info	info;
 
 	a = 0;
