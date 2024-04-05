@@ -12,32 +12,6 @@
 
 #include "push_swap.h"
 
-void	sort_a_less(t_stack **stack, int max)
-{
-	if (*stack)
-	{
-    	if ((*stack)->value == max)
-        	ra(stack);
-    	else if ((*stack)->next->value == max)
-        	rra(stack);
-    	if ((*stack)->value > (*stack)->next->value)
-        	sa(stack);
-	}
-}
-
-void	sort_b_less(t_stack **stack, int min)
-{
-	if (*stack)
-	{
-    	if ((*stack)->value == min)
-        	rb(stack);
-    	else if ((*stack)->next->value == min)
-        	rrb(stack);
-    	if ((*stack)->value < (*stack)->next->value)
-        sb(stack);
-	}
-}
-
 int	is_inRange(int value, int n, t_info *info)
 {
 	int	i;
@@ -73,37 +47,11 @@ void	best_move(t_stack **stack, t_info *info, int n)
 	}
 }
 
-void	ft_sort_b(t_stack **b, t_stack **a, t_info *info)
-{
-	free(info->array);
-	while(info->b_len > 2)
-	{
-		info->nr = 0;
-		info->nrr = 1;
-		*(info->array) = find_max(*b);
-		best_move(b, info, 1);
-		if (info->nr <= info->nrr)
-		{
-			while (info->nr--)
-				rb(b);
-		}
-		else
-		{
-			while (info->nrr--)
-				rrb(b);
-		}
-		pa(a, b, info);
-	}
-	if ((*b)->value > (*b)->next->value)
-		sb(b);
-  	while (info->b_len > 0)
-   		pa(a, b, info);
-}
 
 int	partion(t_stack **a, t_info *info)
 {
-	info->nr = 0;
-	info->nrr = 1;
+	info->nr = 1;
+	info->nrr = 0;
 	best_move(a, info, info->med_idx + 1);
 	if (info->nr <= info->nrr)
 	{
@@ -136,12 +84,13 @@ void	ft_sort(t_stack **a, t_stack **b, t_info *info)
 		}
 		median(info->array + info->med_idx, info->a_len, info);
 	}
-	if ((*a)->value > (*a)->next->value)
+	if ((*a)->value < (*a)->next->value)
 		sa(a);
-	ft_sort_b(b, a, info);
+	ft_sort_b(a, b, info);
+	free(info->array);
 }
 
 /**
- * TODO: -where does the algo do more moves ?;
+ * TODO: - where does the algo do more moves ?;
  * 		 -error handling;
 */

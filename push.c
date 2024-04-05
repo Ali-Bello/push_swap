@@ -11,42 +11,54 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
+t_stack *get_last(t_stack *stack)
+{
+    if (stack)
+    {
+        while (stack->next)
+            stack = stack->next;
+    }
+    return (stack);
+}
 
 void	pa(t_stack **a, t_stack **b, t_info *info)
 {
-    t_stack *tmp;
+    t_stack *tmp, *tmp2;
 
-    if (*b)
-    {
-        tmp = *b;
-        *b = (*b)->next;
-        if (*b)
-            (*b)->prev = 0;
-        tmp->next = *a;
-        if (*a)
-            (*a)->prev = tmp;
-        tmp->prev = 0;
-        *a = tmp;
-        info->a_len++;
-        info->b_len--;
-    }
+    tmp = get_last(*a); //last node of a
+    tmp2 = get_last(*b); //last node of b
+
+    tmp->next = tmp2; //last_a -> next points to last_b;
+    
+    if (tmp2->prev)
+        tmp2->prev->next = 0; //last_b -> points to null
+
+    tmp2->prev = tmp;// last_b -> prev points to last_a  
+    tmp2->next = 0; //last_b ->next points to null
+
+    info->a_len++;
+    info->b_len--;
     write(1, "pa\n", 3);
 }
 
 
 void	pb(t_stack **a, t_stack **b, t_info *info)
 {
-	t_stack *tmp;
+	t_stack *tmp, *tmp2;
 
-	tmp = *a; //points to the node we're moving
-	*a = (*a)->next; //make a point to the next node;
 
-	(*a)->prev = 0;// a prev is now null (it's the first node)
-	tmp->next = *b;// make the new node ->next points to the first node of b
-	tmp->prev = 0;//make the new node ->prev = 0 because it's the first node now;
-	if (*b)
-		(*b)->prev = tmp;// if there is a node make it's prev points to the new node;
-	*b = tmp; // b now points to the new node;
+    tmp = get_last(*b); //last node of b
+    tmp2 = get_last(*a); //last node of a
+
+    if (tmp)
+        tmp->next = tmp2; //last_b -> next points to last_b;
+    else
+        *b = tmp2;
+    tmp2->prev->next = 0; //last_a -> points to null
+
+    tmp2->prev = tmp;// last_a -> prev points to last_a  
+    tmp2->next = 0; //last_a ->next points to null
+
 	info->a_len--;
 	info->b_len++;
 	info->npb++;

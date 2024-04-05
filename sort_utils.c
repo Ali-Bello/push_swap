@@ -61,35 +61,3 @@ void    put_array(t_stack *a, t_info *info)
         a = a->next;
     }
 }
-
-int	find_max(t_stack *stack)
-{
-	int	max;
-
-	if (!stack)
-		return (0);
-	max = stack->value;
-	while (stack)
-	{
-		if (stack->value > max)
-			max = stack->value;
-		stack = stack->next;
-	}
-	return (max);
-}
-
-int find_min(t_stack *b)
-{
-  int min;
-
-	if (!b)
-		return (0);
-  min = b->value;
-  while (b)
-  {
-    if (b-> value < min)
-      min = b->value;
-    b = b->next;
-  }
-  return (min);
-}

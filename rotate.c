@@ -16,14 +16,14 @@ void    ra(t_stack **a)
 {
     t_stack *tmp;
 
-    tmp = *a;
-    while (tmp->next)
-        tmp = tmp->next;// get the last node
+    tmp = get_last(*a);
 
     tmp->next = (*a);// make the lastNode ->next points to the firstnode
+    
     (*a)->prev = tmp;// make the firstNode->prev points to the lastnode
 
     (*a) = (*a)->next;// make a points to the second node;
+    
     (*a)->prev = 0;//make the secondNode->prev points to 0
 
     tmp->next->next = 0; // make the last next pointer points to 0
@@ -34,9 +34,7 @@ void    rb(t_stack **b)
 {
     t_stack *tmp;
 
-    tmp = *b;
-    while (tmp->next)
-        tmp = tmp->next;
+    tmp = get_last(*b);
 
     tmp->next = (*b);
     (*b)->prev = tmp;
@@ -52,15 +50,14 @@ void	rr(t_stack **a, t_stack **b)
 {
 	ra(a);
 	rb(b);
+    write(1, "rr\n", 1);
 }
 
 void    rra(t_stack **a)
 {
     t_stack *tmp;
 
-    tmp = *a;
-    while (tmp->next)
-      tmp = tmp->next;
+    tmp = get_last(*a);
   
     tmp->next= (*a);
     (*a)->prev = tmp;
@@ -76,9 +73,7 @@ void    rrb(t_stack **b)
 {
     t_stack *tmp;
 
-    tmp = *b;
-    while (tmp->next)
-      tmp = tmp->next;
+    tmp = get_last(*b);
 
     tmp->next = (*b);
     (*b)->prev = tmp;

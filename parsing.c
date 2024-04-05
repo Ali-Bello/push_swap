@@ -38,24 +38,27 @@ int	ft_atoi(const char *str)
 	return ((int)(result * sign));
 }
 
-void	add_node(t_stack **a, t_stack **new, t_info *info)
+void	add_node(t_stack **a, t_info *info)
 {
     t_stack *last;
 
     last = *a;
-    while (last && last->next)
+	while (last && last->next)
         last = last->next;
-    if (!last)
+	if (!last)
     {
-        *a = *new;
+        *a = malloc(sizeof(t_stack));
+		if (!*a)
+			return ;
         (*a)->prev = NULL;
+		(*a)->next = NULL;
     }
     else
     {
-        last->next = *new;
-        (*new)->prev = last;
+        last->next = malloc(sizeof(t_stack));
+        last->next->prev = last;
+		last->next->next = 0;
     }
-    (*new)->next = 0;
     info->a_len++;
 }
 
@@ -65,28 +68,22 @@ void	create_stack(t_stack **head, int len, t_info *info)
 	int		i;
 
 	i = 0;
-	while (i < len)
-	{
-		new = malloc(sizeof(t_stack));
-		add_node(head, &new, info);
-		i++;
-	}
+	while (i++ < len)
+		add_node(head, info);
 }
 void	parse(int ac, char **av, t_stack **head, t_info *info)
 {
-	int		i;
 	t_stack	*tmp;
 
-	i = 0;
-	create_stack(head, ac, info);
+	create_stack(head, ac , info);
 	tmp = *head;
-	while (av[i])
+	while (ac)
 	{
-		tmp->value = ft_atoi(av[i]);
+		tmp->value = ft_atoi(av[ac--]);
 		tmp = tmp->next;
-		i++;
 	}
 }
+
 void	free_stack(t_stack **head)
 {
 	t_stack	*tmp;
