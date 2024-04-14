@@ -50,7 +50,7 @@ void	best_move(t_stack **stack, t_info *info, int n)
 
 int	partion(t_stack **a, t_info *info)
 {
-	info->nr = 1;
+	info->nr = 0;
 	info->nrr = 0;
 	best_move(a, info, info->med_idx + 1);
 	if (info->nr <= info->nrr)

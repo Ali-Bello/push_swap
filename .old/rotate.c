@@ -18,15 +18,13 @@ void    ra(t_stack **a)
 
     tmp = get_last(*a);
 
-    tmp->next = (*a);// make the lastNode ->next points to the firstnode
-    
-    (*a)->prev = tmp;// make the firstNode->prev points to the lastnode
+    tmp->next = (*a);
+    (*a)->prev = tmp;
 
-    (*a) = (*a)->next;// make a points to the second node;
-    
-    (*a)->prev = 0;//make the secondNode->prev points to 0
+    tmp->prev->next = 0;
+    tmp->prev = 0;
 
-    tmp->next->next = 0; // make the last next pointer points to 0
+    (*a) = (*a)->prev;
     write(1, "ra\n", 3);
 }
 
@@ -38,11 +36,11 @@ void    rb(t_stack **b)
 
     tmp->next = (*b);
     (*b)->prev = tmp;
-  
-    (*b) = (*b)->next;
-    (*b)->prev = 0;
 
-    tmp->next->next = 0;
+    tmp->prev->next = 0;
+    tmp->prev = 0;
+
+    (*b) = (*b)->prev;
     write(1, "rb\n", 3);
 }
 

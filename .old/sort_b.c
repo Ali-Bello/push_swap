@@ -42,7 +42,7 @@ void    ft_sort_b(t_stack **a, t_stack **b, t_info *info)
     t_stack *tmp = *b;
     while (info->b_len > 1)
     {
-        info->nr = 1;
+        info->nr = 0;
         info->nrr = 0;
         best_bmove(b, info, max_idx--);
         if (info->nr <= info->nrr)
