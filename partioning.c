@@ -12,9 +12,9 @@
 
 #include "push_swap.h"
 
-void    put_array(t_node *a, int *array)
+void	put_array(t_node *a, int *array)
 {
-    int    i;
+	int	i;
 
     i = 0;
     while (a)
@@ -70,31 +70,45 @@ void	best_move(t_node *stack, t_info *info, int value)
 
 	info->nr = 0;
 	info->nrr = 0;
-	size = stack->len;
+	size = info->a_len * (info->a_len > 2) + info->b_len * (info->a_len == 2);
 	i = 0;
-	while (stack && stack->element != value)
+	while (stack && stack->element >= value)
 	{
 		stack = stack->next;
 		i++;
 	}
 	if (i > size / 2)
-		info->nrr = i;
+		info->nrr = size - i;
 	else
 		info->nr = i;
 }
 
-void    partition(t_node **a, t_node **b, t_info *info)
+void	add_node(t_chunk **chunks)
 {
-    info->med_idx = 0;
-    info->array = malloc((*a)->len * sizeof(int));
+	t_chunk	*tmp;
 
-    put_array(*a, info->array);
-    median(info, (*a)->len, info);
-    while ((*a)->len > 2)
-    {
-        while ((*b)->len < info->med_idx + 1)
+	tmp = malloc(sizeof(t_chunk));
+	if (!tmp)
+		return;
+	tmp->chunk_size = 0;
+	tmp->next = *chunks;
+	*chunks = tmp;
+}
+
+void	partition(t_node **a, t_node **b, t_info *info)
+{
+	info->med_idx = 0;
+	info->array = malloc(info->a_len * sizeof(int));
+	info->chunks = 0;
+	put_array(*a, info->array);
+	array_sort(info->array, info->a_len);
+	while (info->a_len > 2)
+	{
+		add_node(&(info->chunks));
+		median(info->array + info->b_len, info->a_len, info);
+		while (info->b_len < info->med_idx + 1)
 		{
-			best_move(a, info, info->med);
+			best_move(*a, info, info->med);
 			while (info->nr--)
 			{
 				rotate(a);
@@ -105,10 +119,15 @@ void    partition(t_node **a, t_node **b, t_info *info)
 				reverse_rotate(a);
 				write(1, "rra\n", 4);
 			}
-			push(a, b);
+			push(a, b, info);
 			write(1, "pb\n", 3);
+			info->chunks->chunk_size++;
 		}
-		median(info->array + info->med_idx, (*a)->len, info);
-    }
+	}
+	if ((*a)->element > (*a)->next->element)
+	{
+		swap(a);
+		write(1, "sa\n", 3);
+	}
 	free(info->array);
 }

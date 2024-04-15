@@ -19,7 +19,7 @@ t_node *get_last(t_node *stack)
     return (stack);
 }
 
-void    rotate(t_node **top)
+void	rotate(t_node **top)
 {
     t_node  *tmp;
     t_node  *last;
@@ -29,6 +29,13 @@ void    rotate(t_node **top)
     (*top) = (*top)->next;
     last->next = tmp;
     tmp->next = 0;
+}
+
+void	rr(t_node **a, t_node **b)
+{
+    rotate(a);
+    rotate(b);
+    write(1, "rr\n", 3);
 }
 
 void    reverse_rotate(t_node **top)
@@ -44,12 +51,45 @@ void    reverse_rotate(t_node **top)
     tmp = pre_last->next;
     tmp->next = *top;
     *top = tmp;
-    pre_last->next = 0; 
+    pre_last->next = 0;
 }
 
-void    swap(t_node **stack)
+void	rrr(t_node **a, t_node **b)
 {
-    t_node  *tmp;
+    reverse_rotate(a);
+    reverse_rotate(b);
+    write(1, "rrr\n", 4);
+}
 
-    t
+void	swap(t_node **stack)
+{
+	t_node	*tmp;
+
+	tmp = *stack;
+	*stack = (*stack)->next;
+	tmp->next = (*stack)->next;
+	(*stack)->next = tmp;
+}
+
+void	push(t_node	**a, t_node	**b, t_info *info)
+{
+	t_node	*tmp;
+
+	tmp = *a;
+	*a = (*a)->next;
+	tmp->next = (*b);
+	(*b) = tmp;
+    info->a_len--;
+    info->b_len++;
+}
+void	push_b(t_node	**a, t_node	**b, t_info *info)
+{
+	t_node	*tmp;
+
+	tmp = *a;
+	*a = (*a)->next;
+	tmp->next = (*b);
+	(*b) = tmp;
+    info->a_len++;
+    info->b_len--;
 }

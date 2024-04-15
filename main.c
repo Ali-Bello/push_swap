@@ -12,11 +12,23 @@
 
 #include "push_swap.h"
 
-int main(char **av, int ac)
+int main(int ac, char **av)
 {
-    t_node  *stack;
-
-    stack = 0;
-    create_stack(&stack, ac - 1);
-    fill_stack(&stack, av);
+	t_node	*a, *b;
+	t_info	info;
+	a = 0;
+	b = 0;
+	info.a_len = 0;
+	info.b_len = 0;
+	create_stack(&a, &info, ac - 1);
+	fill_stack(&a, av);
+	partition(&a, &b, &info);
+	sort(&a, &b, &info);
+	t_node	*tmp = a;
+	while (tmp)
+	{
+		printf ("a -> [%d]\n", tmp->element);
+		tmp = tmp->next;
+	}
+	printf ("---------\n");
 }
