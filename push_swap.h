@@ -52,4 +52,5 @@ void	rotate(t_node **top);
 void	rr(t_node **a, t_node **b);
 void    reverse_rotate(t_node **top);
 void	rrr(t_node **a, t_node **b);
+t_node *get_last(t_node *stack);
 #endif

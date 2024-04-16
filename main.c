@@ -23,6 +23,7 @@ int main(int ac, char **av)
 	create_stack(&a, &info, ac - 1);
 	fill_stack(&a, av);
 	partition(&a, &b, &info);
+	printf("------\n");
 	sort(&a, &b, &info);
 	t_node	*tmp = a;
 	while (tmp)
