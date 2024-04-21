@@ -58,11 +58,14 @@ void	create_stack(t_node **top, t_info *info, int ac)
 	t_node	*tmp;
 	int	i;
 
-    i = 0;
+	i = 0;
 	while (i < ac)
 	{
 		tmp = malloc(sizeof(t_node));
 		tmp->next = *top;
+		tmp->prev = NULL;
+		if (*top)
+			(*top)->prev = tmp;
 		(*top) = tmp;
 		info->a_len++;
 		i++;

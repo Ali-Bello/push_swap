@@ -25,7 +25,14 @@ int main(int ac, char **av)
 	partition(&a, &b, &info);
 	printf("------\n");
 	sort(&a, &b, &info);
-	t_node	*tmp = a;
+	t_node *tmp = b;
+	while (tmp)
+	{
+		printf ("b -> [%d]\n", tmp->element);
+		tmp = tmp->next;
+	}
+	printf ("---------\n");
+	tmp = a;
 	while (tmp)
 	{
 		printf ("a -> [%d]\n", tmp->element);

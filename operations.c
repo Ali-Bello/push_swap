@@ -14,61 +14,71 @@
 
 t_node *get_last(t_node *stack)
 {
-    while (stack && stack->next)
-        stack = stack->next;
-    return (stack);
+	while (stack && stack->next)
+		stack = stack->next;
+	return (stack);
 }
 
 void	rotate(t_node **top)
 {
-    t_node  *tmp;
-    t_node  *last;
+	t_node	*tmp;
+	t_node	*last;
 
-    tmp = *top;
-    last = get_last(*top);
-    (*top) = (*top)->next;
-    last->next = tmp;
-    tmp->next = 0;
+	tmp = *top;
+	last = get_last(*top);
+
+	last->next = tmp;
+	tmp->prev = last;
+
+	(*top) = (*top)->next;
+	(*top)->prev = 0;
+
+	tmp->next = 0;
 }
 
 void	rr(t_node **a, t_node **b)
 {
-    rotate(a);
-    rotate(b);
-    write(1, "rr\n", 3);
+	rotate(a);
+	rotate(b);
+	write(1, "rr\n", 3);
 }
 
-void    reverse_rotate(t_node **top)
+void	reverse_rotate(t_node **top)
 {
-    t_node  *pre_last;
-    t_node  *tmp;
+	t_node	*last;
 
-    pre_last = *top;
-    // get node before last
-    while (pre_last->next->next)
-        pre_last = pre_last->next;
+	last = get_last(*top);
 
-    tmp = pre_last->next;
-    tmp->next = *top;
-    *top = tmp;
-    pre_last->next = 0;
+	last->prev->next = 0;
+	last->prev = 0;
+	last->next = (*top);
+
+	(*top)->prev = last;
+	(*top) = last;
 }
 
 void	rrr(t_node **a, t_node **b)
 {
-    reverse_rotate(a);
-    reverse_rotate(b);
-    write(1, "rrr\n", 4);
+	reverse_rotate(a);
+	reverse_rotate(b);
+	write(1, "rrr\n", 4);
 }
 
-void	swap(t_node **stack)
+void	swap(t_node **top)
 {
 	t_node	*tmp;
 
-	tmp = *stack;
-	*stack = (*stack)->next;
-	tmp->next = (*stack)->next;
-	(*stack)->next = tmp;
+	tmp = *top;
+
+	(*top) = (*top)->next;
+
+	tmp->next = (*top)->next;
+	if (tmp->next)
+		(*top)->next->prev = tmp;
+	(*top)->next = tmp;
+
+	(*top)->prev = 0;
+
 }
 
 void	push(t_node	**a, t_node	**b, t_info *info)
@@ -76,20 +86,33 @@ void	push(t_node	**a, t_node	**b, t_info *info)
 	t_node	*tmp;
 
 	tmp = *a;
+
 	*a = (*a)->next;
+	if (*a)
+		(*a)->prev = NULL;
+
 	tmp->next = (*b);
+	if (*b)
+		(*b)->prev = tmp;
 	(*b) = tmp;
-    info->a_len--;
-    info->b_len++;
+	info->a_len--;
+	info->b_len++;
 }
 void	push_b(t_node	**a, t_node	**b, t_info *info)
 {
 	t_node	*tmp;
 
 	tmp = *a;
+
 	*a = (*a)->next;
+	if (*a)
+		(*a)->prev = NULL;
+
 	tmp->next = (*b);
+	if (*b)
+		(*b)->prev = tmp;
+
 	(*b) = tmp;
-    info->a_len++;
-    info->b_len--;
+	info->a_len++;
+	info->b_len--;
 }

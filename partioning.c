@@ -46,39 +46,41 @@ void	array_sort(int *array, int size)
 	}
 }
 
-void	median(int	*array, int size, t_info *info)
+void	median(int size, t_info *info)
 {
+	if (size >= info->a_len)
+		size = info->a_len - 1;
 	if (size)
 	{
-		if (size % 2 == 0)
-		{
-			info->med = (array[size / 2 - 1] + array[size / 2]) / 2;
-			info->med_idx += size / 2 - 1;
-		}
-		else
-		{
-			info->med =  (array[size / 2]);
-			info->med_idx += size / 2;
-		}
+		info->med_idx += size;
+		info->med = (info->array)[info->med_idx];
 	}
 }
 
-void	best_move(t_node *stack, t_info *info, int value)
+void	best_move(t_node **stack, t_info *info)
 {
-	int	i;
-	int	size;
+	int	i, j;
+	t_node	*last;
+	t_node	*first;
 
+	first = *stack;
+	last = get_last(*stack);
 	info->nr = 0;
 	info->nrr = 0;
-	size = info->a_len * (info->a_len > 2) + info->b_len * (info->a_len == 2);
 	i = 0;
-	while (stack && stack->element >= value)
+	while (first && first->element >= (info->array)[info->med_idx])
 	{
-		stack = stack->next;
+		first = first->next;
 		i++;
 	}
-	if (i > size / 2)
-		info->nrr = size - i;
+	j = 1;
+	while (last && last->element >= (info->array)[info->med_idx])
+	{
+		last = last->prev;
+		j++;
+	}
+	if (i > j)
+		info->nrr = j;
 	else
 		info->nr = i;
 }
@@ -102,32 +104,29 @@ void	partition(t_node **a, t_node **b, t_info *info)
 	info->chunks = 0;
 	put_array(*a, info->array);
 	array_sort(info->array, info->a_len);
-	while (info->a_len > 2)
+	while (info->a_len > 1)
 	{
 		add_node(&(info->chunks));
-		median(info->array + info->b_len, info->a_len, info);
-		while (info->b_len < info->med_idx + 1)
+		median(20, info);
+		while (info->a_len > 1 && info->b_len < info->med_idx)
 		{
-			best_move(*a, info, info->med);
-			while (info->nr--)
+			best_move(a, info);
+			while (info->nr)
 			{
 				rotate(a);
 				write(1, "ra\n", 3);
+				info->nr--;
 			}
-			while (info->nrr--)
+			while (info->nrr)
 			{
 				reverse_rotate(a);
 				write(1, "rra\n", 4);
+				info->nrr--;
 			}
 			push(a, b, info);
 			write(1, "pb\n", 3);
 			info->chunks->chunk_size++;
 		}
-	}
-	if ((*a)->element > (*a)->next->element)
-	{
-		swap(a);
-		write(1, "sa\n", 3);
 	}
 	free(info->array);
 }

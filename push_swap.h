@@ -19,13 +19,16 @@
 
 typedef struct s_node
 {
-    int				element;
-    struct s_node	*next;
+	struct s_node	*prev;
+	int				element;
+	struct s_node	*next;
 } t_node;
 
 typedef struct s_chunk
 {
 	int chunk_size;
+	int	a_rotations;
+	int	b_rotations;
 	struct s_chunk *next;
 } t_chunk;
 
