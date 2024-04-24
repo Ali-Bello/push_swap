@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aderraj <aderraj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 17:56:48 by marvin            #+#    #+#             */
-/*   Updated: 2024/04/06 17:56:48 by marvin           ###   ########.fr       */
+/*   Updated: 2024/04/23 23:27:58 by aderraj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,27 +21,32 @@ typedef struct s_node
 {
 	struct s_node	*prev;
 	int				element;
+	int				a_r;
+	int				a_rr;
+	int				b_r;
+	int				b_rr;
+	int				rr;
+	int				rrr;
+	int				is_max;
 	struct s_node	*next;
 } t_node;
-
-typedef struct s_chunk
-{
-	int chunk_size;
-	int	a_rotations;
-	int	b_rotations;
-	struct s_chunk *next;
-} t_chunk;
 
 typedef struct s_info
 {
 	int	a_len;
 	int	b_len;
-	int	*array;
-	int	med;
-	int	med_idx;
-	int nr;
-	int nrr;
-	t_chunk *chunks;
+	int	a_max;
+	int	a_min;
+	int	b_max;
+	int	b_min;
+	int	nr;
+	int	nrr;
+	int	a_r;
+	int	a_rr;
+	int	b_r;
+	int	b_rr;
+	int	rr;
+	int	rrr;
 } t_info;
 
 void	create_stack(t_node **top, t_info *info, int ac);
@@ -56,4 +61,9 @@ void	rr(t_node **a, t_node **b);
 void    reverse_rotate(t_node **top);
 void	rrr(t_node **a, t_node **b);
 t_node *get_last(t_node *stack);
+void	push_everything(t_node **a, t_node **b, t_info *info);
+void	set_max_min(t_node **b, t_info *info);
+void	bring_max(t_node **stack, t_info *info);
+void	find_insert_pos(int value, t_node **b, t_info *info);
+void	apply_moves(t_node **a, t_node **b, t_info *info);
 #endif

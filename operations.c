@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operations.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aderraj <aderraj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 15:09:22 by marvin            #+#    #+#             */
-/*   Updated: 2024/04/11 15:09:22 by marvin           ###   ########.fr       */
+/*   Updated: 2024/04/24 03:27:44 by aderraj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ void	push(t_node	**a, t_node	**b, t_info *info)
 	(*b) = tmp;
 	info->a_len--;
 	info->b_len++;
+	write(1, "pb\n", 3);
 }
 void	push_b(t_node	**a, t_node	**b, t_info *info)
 {
@@ -115,4 +116,5 @@ void	push_b(t_node	**a, t_node	**b, t_info *info)
 	(*b) = tmp;
 	info->a_len++;
 	info->b_len--;
+	write(1, "pa\n", 3);
 }
