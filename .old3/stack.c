@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aderraj <aderraj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/24 21:56:05 by aderraj           #+#    #+#             */
-/*   Updated: 2024/04/25 01:44:02 by aderraj          ###   ########.fr       */
+/*   Created: 2024/04/06 17:15:58 by marvin            #+#    #+#             */
+/*   Updated: 2024/04/22 00:58:27 by aderraj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,25 +47,27 @@ void	fill_stack(t_node **top, char **av)
 	tmp = *top;
 	while (tmp)
 	{
-		tmp->value = ft_atoi(av[i]);
+		tmp->element = ft_atoi(av[i]);
 		tmp = tmp->next;
 		i++;
 	}
 }
 
-void	create_stack(t_node **top, t_info *info)
+void	create_stack(t_node **top, t_info *info, int ac)
 {
 	t_node	*tmp;
 	int	i;
 
 	i = 0;
-	while (i < info->a_len)
+	while (i < ac)
 	{
 		tmp = malloc(sizeof(t_node));
-		if (!tmp)
-			return;
 		tmp->next = *top;
+		tmp->prev = NULL;
+		if (*top)
+			(*top)->prev = tmp;
 		(*top) = tmp;
+		info->a_len++;
 		i++;
 	}
 }

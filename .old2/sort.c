@@ -6,7 +6,7 @@
 /*   By: aderraj <aderraj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 18:53:56 by aderraj           #+#    #+#             */
-/*   Updated: 2024/04/22 00:53:16 by aderraj          ###   ########.fr       */
+/*   Updated: 2024/04/25 19:28:25 by aderraj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,27 +93,11 @@ void	sort(t_node **a, t_node **b, t_info *info)
 	{
 		i = 0;
 		info->nr = 0;
-		// t_node	*tmp;
-		// tmp = (*a);
-		// while (tmp)
-		// {
-		// 	printf("a = [%d]\n", tmp->element);
-		// 	tmp = tmp->next;
-		// }
-		// printf("------\n");
-		// tmp = (*b);
-		// while (tmp)
-		// {
-		// 	printf("b = [%d]\n", tmp->element);
-		// 	tmp = tmp->next;
-		// }
-		// printf("------\n");
 		while (info->b_len && info->chunks->chunk_size > 0)
 		{
 			insert_a(a, b, info);
 			info->chunks->chunk_size--;
 		}
-		// printf("info->nr = [%d]\n", info->nr);
 		sort_chunk(a, b, info);
 		if (info->nr)
 				reset_rotations(a, b,info);

@@ -5,116 +5,99 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aderraj <aderraj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/11 15:09:22 by marvin            #+#    #+#             */
-/*   Updated: 2024/04/24 03:27:44 by aderraj          ###   ########.fr       */
+/*   Created: 2024/04/24 21:58:49 by aderraj           #+#    #+#             */
+/*   Updated: 2024/04/25 02:08:16 by aderraj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_node *get_last(t_node *stack)
-{
-	while (stack && stack->next)
-		stack = stack->next;
-	return (stack);
-}
-
-void	rotate(t_node **top)
+void	rotate(t_node **stack, char *str)
 {
 	t_node	*tmp;
-	t_node	*last;
+	t_node	*new_top;
 
-	tmp = *top;
-	last = get_last(*top);
+	tmp  = *stack;
+	while (tmp->next)
+		tmp = tmp->next;
 
-	last->next = tmp;
-	tmp->prev = last;
+	new_top = (*stack)->next;
 
-	(*top) = (*top)->next;
-	(*top)->prev = 0;
+	(*stack)->next = 0;
+	tmp->next = (*stack);
 
-	tmp->next = 0;
+	(*stack) = new_top;
+
+	if (str)
+		printf("%s", str);
 }
 
 void	rr(t_node **a, t_node **b)
 {
-	rotate(a);
-	rotate(b);
+	rotate(a, NULL);
+	rotate(b, NULL);
 	write(1, "rr\n", 3);
 }
 
-void	reverse_rotate(t_node **top)
+void	reverse_rotate(t_node **stack, char *str)
 {
-	t_node	*last;
+	t_node	*tmp;
+	t_node	*prev;
 
-	last = get_last(*top);
+	tmp = *stack;
+	while (tmp->next)
+	{
+		prev = tmp;
+		tmp = tmp->next;
+	}
 
-	last->prev->next = 0;
-	last->prev = 0;
-	last->next = (*top);
+	prev->next = NULL;
+	tmp->next = *stack;
+	(*stack) = tmp;
 
-	(*top)->prev = last;
-	(*top) = last;
+	if (str)
+		printf("%s", str);
 }
-
 void	rrr(t_node **a, t_node **b)
 {
-	reverse_rotate(a);
-	reverse_rotate(b);
+	reverse_rotate(a, NULL);
+	reverse_rotate(b, NULL);
 	write(1, "rrr\n", 4);
 }
 
-void	swap(t_node **top)
+void	push(t_node	**stack_1, t_node **stack_2, t_info *info, char *str)
 {
 	t_node	*tmp;
 
-	tmp = *top;
+	tmp = (*stack_1);
 
-	(*top) = (*top)->next;
+	(*stack_1) = (*stack_1)->next;
 
-	tmp->next = (*top)->next;
-	if (tmp->next)
-		(*top)->next->prev = tmp;
-	(*top)->next = tmp;
+	tmp->next = (*stack_2);
+	(*stack_2) = tmp;
 
-	(*top)->prev = 0;
-
+	if (!strcmp(str, "pa\n"))
+	{
+		info->a_len++;
+		info->b_len--;
+	}
+	else
+	{
+		info->b_len++;
+		info->a_len--;
+	}
+	printf("%s", str);
 }
 
-void	push(t_node	**a, t_node	**b, t_info *info)
+void	swap(t_node **stack, char *str)
 {
 	t_node	*tmp;
 
-	tmp = *a;
+	tmp = (*stack)->next;
 
-	*a = (*a)->next;
-	if (*a)
-		(*a)->prev = NULL;
+	(*stack)->next = tmp->next;
+	tmp->next = (*stack);
+	(*stack) = tmp;
 
-	tmp->next = (*b);
-	if (*b)
-		(*b)->prev = tmp;
-	(*b) = tmp;
-	info->a_len--;
-	info->b_len++;
-	write(1, "pb\n", 3);
-}
-void	push_b(t_node	**a, t_node	**b, t_info *info)
-{
-	t_node	*tmp;
-
-	tmp = *a;
-
-	*a = (*a)->next;
-	if (*a)
-		(*a)->prev = NULL;
-
-	tmp->next = (*b);
-	if (*b)
-		(*b)->prev = tmp;
-
-	(*b) = tmp;
-	info->a_len++;
-	info->b_len--;
-	write(1, "pa\n", 3);
+	printf("%s", str);
 }

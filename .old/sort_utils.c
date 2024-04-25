@@ -50,9 +50,9 @@ void	median(int	*array, int size, t_info *info)
 	}
 }
 
-void    put_array(t_stack *a, t_info *info)
+void	put_array(t_stack *a, t_info *info)
 {
-    int    i;
+    int	i;
 
     i = 0;
     while (a && info->a_len)

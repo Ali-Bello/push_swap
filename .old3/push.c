@@ -6,7 +6,7 @@
 /*   By: aderraj <aderraj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 18:05:48 by aderraj           #+#    #+#             */
-/*   Updated: 2024/04/24 00:00:31 by aderraj          ###   ########.fr       */
+/*   Updated: 2024/04/25 19:24:24 by aderraj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,6 @@ void	find_cheapest_moves(t_node **a, t_info *info)
 		if (tmp->a_r + tmp->a_rr + tmp->b_r + tmp->b_rr + tmp->rr + tmp->rrr < min)
 		{
 			min = tmp->a_r + tmp->a_rr + tmp->b_r + tmp->b_rr + tmp->rr + tmp->rrr;
-			// printf("min = [%d]\n", min);
-			// printf("min elem = [%d]\n", tmp->element);
 			info->a_r = tmp->a_r;
 			info->a_rr = tmp->a_rr;
 			info->b_r = tmp->b_r;
@@ -131,13 +129,6 @@ void	push_everything(t_node **a, t_node **b, t_info *info)
 	{
 		set_push_price(a, b, info);
 		reduce_price(a);
-		t_node *tmp;
-		tmp = (*a);
-		while (tmp)
-		{
-			// printf("a -> [%d]\t a->a_r = [%d]\t a->a_rr = [%d]\t a->b_r = [%d]\ta->b_rr = [%d] a->rr = [%d]\t a->rrr = [%d]\n", tmp->element, tmp->a_r, tmp->a_rr, tmp->b_r, tmp->b_rr, tmp->rr, tmp->rrr);
-			tmp = tmp->next;
-		}
 		find_cheapest_moves(a, info);
 		apply_moves(a, b, info);
 		push(a, b, info);

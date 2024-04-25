@@ -12,9 +12,6 @@
 
 #include "push_swap.h"
 
-// calculate the median value of the chunk
-// calculate the median value of the elements bigger than the chunk * repeat this step until you find the biggest number in the chunk
-// reverse rotate the rotations 
 
 void	best_bmove(t_stack **stack, t_info *info, int n)
 {
@@ -59,6 +56,4 @@ void    ft_sort_b(t_stack **a, t_stack **b, t_info *info)
         }
     }
     pa(a, b, info);
-    //if the value we are pushing is bigger than the top, push it right away;
-    //else rotate until you find something smaller than the value;
 }

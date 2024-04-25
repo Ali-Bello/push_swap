@@ -90,7 +90,3 @@ void	ft_sort(t_stack **a, t_stack **b, t_info *info)
 	free(info->array);
 }
 
-/**
- * TODO: - where does the algo do more moves ?;
- * 		 -error handling;
-*/

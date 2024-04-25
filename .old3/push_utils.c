@@ -6,7 +6,7 @@
 /*   By: aderraj <aderraj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 15:01:51 by aderraj           #+#    #+#             */
-/*   Updated: 2024/04/24 03:11:13 by aderraj          ###   ########.fr       */
+/*   Updated: 2024/04/24 19:39:18 by aderraj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,12 @@ void	apply_moves(t_node **a, t_node **b, t_info *info)
 		rotate(a);
 		write(1, "ra\n", 3);
 		info->a_r--;
+	}
+	while (info->a_rr > 0)
+	{
+		reverse_rotate(a);
+		write(1, "rra\n", 4);
+		info->a_rr--;
 	}
 	while (info->b_r > 0)
 	{

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aderraj <aderraj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/06 17:56:48 by marvin            #+#    #+#             */
-/*   Updated: 2024/04/23 23:27:58 by aderraj          ###   ########.fr       */
+/*   Created: 2024/04/24 21:52:42 by aderraj           #+#    #+#             */
+/*   Updated: 2024/04/25 19:15:32 by aderraj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,54 +16,46 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>
-
-typedef struct s_node
-{
-	struct s_node	*prev;
-	int				element;
-	int				a_r;
-	int				a_rr;
-	int				b_r;
-	int				b_rr;
-	int				rr;
-	int				rrr;
-	int				is_max;
-	struct s_node	*next;
-} t_node;
+#include <string.h>
+#include <limits.h>
 
 typedef struct s_info
 {
 	int	a_len;
 	int	b_len;
-	int	a_max;
-	int	a_min;
-	int	b_max;
-	int	b_min;
-	int	nr;
-	int	nrr;
-	int	a_r;
-	int	a_rr;
-	int	b_r;
-	int	b_rr;
+	int	max;
+	int	min;
+	int	ra;
+	int	rra;
+	int	rb;
+	int	rrb;
 	int	rr;
 	int	rrr;
 } t_info;
 
-void	create_stack(t_node **top, t_info *info, int ac);
+typedef struct s_node
+{
+	int				value;
+	t_info			info;
+	struct s_node	*next;
+} t_node;
+
+void	create_stack(t_node **top, t_info *info);
 void	fill_stack(t_node **top, char **av);
-void	partition(t_node **a, t_node **b, t_info *info);
-void	sort(t_node **a, t_node **b, t_info *info);
-void	push(t_node	**a, t_node	**b, t_info *info);
-void	push_b(t_node	**a, t_node	**b, t_info *info);
-void	swap(t_node **stack);
-void	rotate(t_node **top);
+
+void	push(t_node	**stack_1, t_node **stack_2, t_info *info, char *str);
+void	swap(t_node **stack, char *str);
+void	rotate(t_node **stack, char *str);
+void	reverse_rotate(t_node **stack, char *str);
 void	rr(t_node **a, t_node **b);
-void    reverse_rotate(t_node **top);
 void	rrr(t_node **a, t_node **b);
-t_node *get_last(t_node *stack);
-void	push_everything(t_node **a, t_node **b, t_info *info);
-void	set_max_min(t_node **b, t_info *info);
-void	bring_max(t_node **stack, t_info *info);
-void	find_insert_pos(int value, t_node **b, t_info *info);
+
+void	init_zero(t_info *info);
+void	set_min_max(t_node **stack, t_info *info);
+void	bring_to_top(t_node **stack, t_info *info);
 void	apply_moves(t_node **a, t_node **b, t_info *info);
+void	reduce_price(t_node **a);
+
+void	push_to_b(t_node **a, t_node **b, t_info *info);
+void	sort(t_node **a, t_node **b, t_info *info);
 #endif
