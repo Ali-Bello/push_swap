@@ -6,7 +6,7 @@
 /*   By: aderraj <aderraj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 21:52:42 by aderraj           #+#    #+#             */
-/*   Updated: 2024/04/25 19:15:32 by aderraj          ###   ########.fr       */
+/*   Updated: 2024/04/25 22:32:02 by aderraj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <limits.h>
+#include "../libft/libft.h"
 
 typedef struct s_info
 {
@@ -58,4 +59,5 @@ void	reduce_price(t_node **a);
 
 void	push_to_b(t_node **a, t_node **b, t_info *info);
 void	sort(t_node **a, t_node **b, t_info *info);
+char	**parse(char **av);
 #endif

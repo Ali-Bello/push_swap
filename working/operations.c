@@ -6,7 +6,7 @@
 /*   By: aderraj <aderraj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 21:58:49 by aderraj           #+#    #+#             */
-/*   Updated: 2024/04/25 02:08:16 by aderraj          ###   ########.fr       */
+/*   Updated: 2024/04/25 19:53:20 by aderraj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,15 +89,3 @@ void	push(t_node	**stack_1, t_node **stack_2, t_info *info, char *str)
 	printf("%s", str);
 }
 
-void	swap(t_node **stack, char *str)
-{
-	t_node	*tmp;
-
-	tmp = (*stack)->next;
-
-	(*stack)->next = tmp->next;
-	tmp->next = (*stack);
-	(*stack) = tmp;
-
-	printf("%s", str);
-}
