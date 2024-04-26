@@ -6,24 +6,97 @@
 /*   By: aderraj <aderraj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 19:54:36 by aderraj           #+#    #+#             */
-/*   Updated: 2024/04/25 22:49:22 by aderraj          ###   ########.fr       */
+/*   Updated: 2024/04/26 06:55:10 by aderraj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-char	**parse(char **av)
+char	**get_args(char **av, int *a_len)
 {
 	char	*buffer;
 	char	*tmp;
 	int		i;
 
 	buffer = NULL;
-	i = 1;
+	i = 0;
 	while (av[i])
 	{
 		tmp = ft_strjoin(ft_strdup(av[i++]), " ");
 		buffer = ft_strjoin(buffer, tmp);
+		free(tmp);
 	}
-	return (ft_split(buffer, ' '));
+	return (ft_split(buffer, ' ', a_len));
+}
+
+int	is_sorted(char **av)
+{
+	int	i;
+
+	i = 0;
+	while (av[i + 1])
+	{
+		if (ft_atoi(av[i], av) > ft_atoi(av[i + 1], av))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+int	is_duplicate(char **av)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (av[i])
+	{
+		j = i + 1;
+		while (av[j])
+		{
+			if (ft_atoi(av[i], av) == ft_atoi(av[j], av))
+				return (1);
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
+
+int	is_notNum(char **av)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (av[i])
+	{
+		j = 0;
+		if (av[i][j] == '-' || av[i][j] == '+')
+			j++;
+		while (av[i][j])
+		{
+			if (!(av[i][j] >= '0' && av[i][j] <= '9')
+				&& (av[i][j] != ' ') && !(av[i][j] >= 9 && av[i][j] <= 13))
+				return (1);
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
+
+char	**parse(char **av, int *a_len)
+{
+	char	**args;
+	int		i;
+	args = get_args(av, a_len);
+	if (is_duplicate(args) || is_notNum(args))
+	{
+		while (args[i])
+			free(args[i++]);
+		free(args);
+		ft_putstr_fd("Error\n", 2);
+		exit(-1);
+	}
+	return (args);
 }
