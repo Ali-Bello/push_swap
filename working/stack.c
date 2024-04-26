@@ -6,7 +6,7 @@
 /*   By: aderraj <aderraj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 21:56:05 by aderraj           #+#    #+#             */
-/*   Updated: 2024/04/26 06:55:25 by aderraj          ###   ########.fr       */
+/*   Updated: 2024/04/26 08:20:06 by aderraj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	fill_stack(t_node **top, char **av)
 	tmp = *top;
 	while (tmp)
 	{
-		tmp->value = ft_atoi(av[i], av);
+		tmp->value = ft_safe_atoi(av[i], av);
 		tmp = tmp->next;
 		i++;
 	}

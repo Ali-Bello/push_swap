@@ -6,7 +6,7 @@
 /*   By: aderraj <aderraj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 21:52:42 by aderraj           #+#    #+#             */
-/*   Updated: 2024/04/26 07:17:55 by aderraj          ###   ########.fr       */
+/*   Updated: 2024/04/26 09:38:01 by aderraj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,5 @@ char	**parse(char **av, int *a_len);
 
 int	is_sorted(char **av);
 void	free_args(char **args);
+void	free_stack(t_node *stack);
 #endif

@@ -6,7 +6,7 @@
 /*   By: aderraj <aderraj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 01:27:41 by aderraj           #+#    #+#             */
-/*   Updated: 2024/04/26 06:57:08 by aderraj          ###   ########.fr       */
+/*   Updated: 2024/04/26 08:19:33 by aderraj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 void	ft_putstr_fd(char *s, int fd);
 
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
-int		ft_atoi(const char *str, char **args);
+int		ft_safe_atoi(const char *str, char **args);
 
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 

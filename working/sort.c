@@ -6,7 +6,7 @@
 /*   By: aderraj <aderraj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 02:09:37 by aderraj           #+#    #+#             */
-/*   Updated: 2024/04/25 19:19:19 by aderraj          ###   ########.fr       */
+/*   Updated: 2024/04/26 10:58:49 by aderraj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	sort_three(t_node **a, t_info *info)
 	set_min_max(a, info);
 
 	if ((*a)->next->value == info->max)
-		swap(a, "ra\n");
+		swap(a, "sa\n");
 	if ((*a)->value == info->max)
 		rotate(a, "ra\n");
 	if ((*a)->value > (*a)->next->value)
@@ -48,4 +48,7 @@ void	sort(t_node **a, t_node **b, t_info *info)
 		}
 		push(b, a, info, "pa\n");
 	}
+	set_min_max(a, info);
+	while ((*a)->value != info->min)
+		reverse_rotate(a, "rra\n");
 }

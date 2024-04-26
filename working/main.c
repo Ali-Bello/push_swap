@@ -1,5 +1,18 @@
 #include "push_swap.h"
 
+int	is_stack_sorted(t_node *a)
+{
+	t_node *tmp;
+
+	tmp = a;
+	while (tmp->next)
+	{
+		if (tmp->value > tmp->next->value)
+			return (0);
+		tmp = tmp->next;
+	}
+	return (1);
+}
 void	free_args(char **args)
 {
 	int i;
@@ -10,6 +23,19 @@ void	free_args(char **args)
 	free(args);
 }
 
+void	free_stack(t_node *stack)
+{
+	t_node	*tmp;
+
+	tmp = stack;
+	while (stack)
+	{
+		tmp = stack;
+		stack = stack->next;
+		free(tmp);
+	}
+	stack = 0;
+}
 int main(int ac, char **av)
 {
 	t_node	*a;
@@ -25,12 +51,12 @@ int main(int ac, char **av)
 	info.b_len = 0;
 	create_stack(&a, &info);
 	fill_stack(&a, args);
-		t_node *tmp = a;
-	while (tmp)
-	{
-		printf("a-> [%d]\n", tmp->value);
-		tmp = tmp->next;
-	}
 	push_to_b(&a, &b, &info);
 	sort(&a, &b, &info);
+	// if (is_stack_sorted(a))
+	// 	printf("yes\n");
+	// else
+	// 	printf("laysa\n");
+	free_args(args);
+	free_stack(a);
 }

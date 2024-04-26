@@ -6,7 +6,7 @@
 /*   By: aderraj <aderraj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 19:54:36 by aderraj           #+#    #+#             */
-/*   Updated: 2024/04/26 06:55:10 by aderraj          ###   ########.fr       */
+/*   Updated: 2024/04/26 08:19:58 by aderraj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	is_sorted(char **av)
 	i = 0;
 	while (av[i + 1])
 	{
-		if (ft_atoi(av[i], av) > ft_atoi(av[i + 1], av))
+		if (ft_safe_atoi(av[i], av) > ft_safe_atoi(av[i + 1], av))
 			return (0);
 		i++;
 	}
@@ -53,7 +53,7 @@ int	is_duplicate(char **av)
 		j = i + 1;
 		while (av[j])
 		{
-			if (ft_atoi(av[i], av) == ft_atoi(av[j], av))
+			if (ft_safe_atoi(av[i], av) == ft_safe_atoi(av[j], av))
 				return (1);
 			j++;
 		}
