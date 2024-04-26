@@ -6,7 +6,7 @@
 /*   By: aderraj <aderraj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 21:52:42 by aderraj           #+#    #+#             */
-/*   Updated: 2024/04/26 09:38:01 by aderraj          ###   ########.fr       */
+/*   Updated: 2024/04/26 14:27:30 by aderraj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,9 @@ void	push(t_node	**stack_1, t_node **stack_2, t_info *info, char *str);
 void	swap(t_node **stack, char *str);
 void	rotate(t_node **stack, char *str);
 void	reverse_rotate(t_node **stack, char *str);
-void	rr(t_node **a, t_node **b);
-void	rrr(t_node **a, t_node **b);
+void	rr(t_node **a, t_node **b, char *str);
+void	rrr(t_node **a, t_node **b, char *str);
+void	ss(t_node **a, t_node **b);
 
 void	init_zero(t_info *info);
 void	set_min_max(t_node **stack, t_info *info);

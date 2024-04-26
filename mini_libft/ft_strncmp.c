@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aderraj <aderraj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/02 13:57:27 by aderraj           #+#    #+#             */
-/*   Updated: 2023/11/18 19:42:15 by aderraj          ###   ########.fr       */
+/*   Created: 2024/04/26 13:34:23 by aderraj           #+#    #+#             */
+/*   Updated: 2024/04/26 14:10:10 by aderraj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	int	i;
-	int	len;
+	size_t	i;
 
-	i = 0;
-	len = ft_strlen(s);
-	while (i <= len)
+	if (n)
 	{
-		if (s[i] == (char)c)
-			return ((char *)(s + i));
-		i++;
+		i = 0;
+		while (s1[i] && s2[i] && i < n)
+		{
+			if ((unsigned char)(s1[i]) == (unsigned char)(s2[i]))
+				i++;
+			else
+				break ;
+		}
+		if (n != i)
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 	}
-	return (NULL);
+	return (0);
 }

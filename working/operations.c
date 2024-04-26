@@ -6,7 +6,7 @@
 /*   By: aderraj <aderraj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 21:58:49 by aderraj           #+#    #+#             */
-/*   Updated: 2024/04/25 19:53:20 by aderraj          ###   ########.fr       */
+/*   Updated: 2024/04/26 14:56:59 by aderraj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	rotate(t_node **stack, char *str)
 	t_node	*tmp;
 	t_node	*new_top;
 
+	if (!*stack)
+		return;
 	tmp  = *stack;
 	while (tmp->next)
 		tmp = tmp->next;
@@ -29,14 +31,18 @@ void	rotate(t_node **stack, char *str)
 	(*stack) = new_top;
 
 	if (str)
-		printf("%s", str);
+		ft_putstr_fd(str, 1);
+
 }
 
-void	rr(t_node **a, t_node **b)
+void	rr(t_node **a, t_node **b, char *str)
 {
+	if (!*a || !*b)
+		return ;
 	rotate(a, NULL);
 	rotate(b, NULL);
-	write(1, "rr\n", 3);
+	if (str)
+		write(1, "rr\n", 3);
 }
 
 void	reverse_rotate(t_node **stack, char *str)
@@ -44,6 +50,8 @@ void	reverse_rotate(t_node **stack, char *str)
 	t_node	*tmp;
 	t_node	*prev;
 
+	if (!*stack)
+		return ;
 	tmp = *stack;
 	while (tmp->next)
 	{
@@ -56,19 +64,25 @@ void	reverse_rotate(t_node **stack, char *str)
 	(*stack) = tmp;
 
 	if (str)
-		printf("%s", str);
+		ft_putstr_fd(str, 1);
+
 }
-void	rrr(t_node **a, t_node **b)
+void	rrr(t_node **a, t_node **b, char *str)
 {
+	if (!*a || !*b)
+		return ;
 	reverse_rotate(a, NULL);
 	reverse_rotate(b, NULL);
-	write(1, "rrr\n", 4);
+	if (str)
+		write(1, "rrr\n", 4);
 }
 
 void	push(t_node	**stack_1, t_node **stack_2, t_info *info, char *str)
 {
 	t_node	*tmp;
 
+	if (!*stack_1)
+		return;
 	tmp = (*stack_1);
 
 	(*stack_1) = (*stack_1)->next;
@@ -76,16 +90,17 @@ void	push(t_node	**stack_1, t_node **stack_2, t_info *info, char *str)
 	tmp->next = (*stack_2);
 	(*stack_2) = tmp;
 
-	if (!strcmp(str, "pa\n"))
+	if (str && info && !strcmp(str, "pa\n"))
 	{
 		info->a_len++;
 		info->b_len--;
 	}
-	else
+	else if (info)
 	{
 		info->b_len++;
 		info->a_len--;
 	}
-	printf("%s", str);
+	if (str)
+		ft_putstr_fd(str, 1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: aderraj <aderraj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 22:57:48 by aderraj           #+#    #+#             */
-/*   Updated: 2024/04/25 19:54:11 by aderraj          ###   ########.fr       */
+/*   Updated: 2024/04/26 12:51:07 by aderraj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,8 +108,10 @@ void	set_cheapest_moves(t_node **a, t_node **b, t_info *info)
 
 void	push_to_b(t_node **a, t_node **b, t_info *info)
 {
-	push(a, b, info, "pb\n");
-	push(a, b, info, "pb\n");
+	if (info->a_len > 3)
+		push(a, b, info, "pb\n");
+	if (info->a_len > 4)
+		push(a, b, info, "pb\n");
 
 	while (info->a_len > 3)
 	{

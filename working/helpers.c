@@ -6,7 +6,7 @@
 /*   By: aderraj <aderraj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 23:57:23 by aderraj           #+#    #+#             */
-/*   Updated: 2024/04/25 02:08:31 by aderraj          ###   ########.fr       */
+/*   Updated: 2024/04/26 13:44:43 by aderraj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	set_min_max(t_node **stack, t_info *info)
 	int		max;
 	int		min;
 
+	if (!*stack)
+		return ;
 	tmp = *stack;
 	max = (*stack)->value;
 	min = (*stack)->value;
@@ -66,9 +68,9 @@ void	init_zero(t_info *info)
 void	apply_moves(t_node **a, t_node **b, t_info *info)
 {
 	while (info->rr-- > 0)
-		rr(a, b);
+		rr(a, b, "rr");
 	while (info->rrr-- > 0)
-		rrr(a, b);
+		rrr(a, b, "rrr");
 	while (info->ra-- > 0)
 		rotate(a, "ra\n");
 	while (info->rra-- > 0)
