@@ -6,13 +6,14 @@
 /*   By: aderraj <aderraj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 19:10:10 by aderraj           #+#    #+#             */
-/*   Updated: 2023/11/18 19:48:18 by aderraj          ###   ########.fr       */
+/*   Updated: 2024/04/26 06:56:33 by aderraj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "../working/push_swap.h"
 
-int	ft_atoi(const char *str)
+int	ft_atoi(const char *str, char **args)
 {
 	int			i;
 	int			sign;
@@ -33,6 +34,12 @@ int	ft_atoi(const char *str)
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		result = result * 10 + (str[i] - '0');
+		if (result > INT_MAX || result < INT_MIN)
+		{
+			free_args(args);
+			ft_putstr_fd("Error\n", 2);
+			exit(-1);
+		}
 		i++;
 	}
 	return ((int)(result * sign));

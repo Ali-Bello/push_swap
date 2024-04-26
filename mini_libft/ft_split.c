@@ -6,13 +6,13 @@
 /*   By: aderraj <aderraj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 00:16:06 by aderraj           #+#    #+#             */
-/*   Updated: 2024/04/25 22:41:50 by aderraj          ###   ########.fr       */
+/*   Updated: 2024/04/26 05:39:11 by aderraj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	count(const char *s, char c)
+static size_t	count(const char *s, char c, int *len)
 {
 	size_t	i;
 	size_t	count;
@@ -30,6 +30,7 @@ static size_t	count(const char *s, char c)
 		if (i > flag)
 			count++;
 	}
+	*len = count;
 	return (count);
 }
 
@@ -68,16 +69,17 @@ static char	**fill(char **ptr, const char *s, char c)
 		}
 	}
 	ptr[j] = NULL;
+	free((void *)s);
 	return (ptr);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c, int *len)
 {
 	char	**ptr;
 
 	if (!s)
 		return (NULL);
-	ptr = malloc(sizeof(char *) * (count(s, c) + 1));
+	ptr = malloc(sizeof(char *) * (count(s, c, len) + 1));
 	if (!ptr)
 		return (NULL);
 	return (fill(ptr, s, c));
