@@ -34,7 +34,7 @@ int	ft_safe_atoi(const char *str, char **args)
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		result = result * 10 + (str[i] - '0');
-		if (result > INT_MAX || result < INT_MIN)
+		if ((sign *result ) > INT_MAX || (sign * result) < INT_MIN)
 		{
 			free_args(args);
 			ft_putstr_fd("Error\n", 2);

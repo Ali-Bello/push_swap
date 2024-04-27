@@ -61,6 +61,7 @@ void	reduce_price(t_node **a);
 void	push_to_b(t_node **a, t_node **b, t_info *info);
 void	sort(t_node **a, t_node **b, t_info *info);
 char	**parse(char **av, int *a_len);
+int	is_duplicate(char **av);
 
 int	is_sorted(char **av);
 void	free_args(char **args);

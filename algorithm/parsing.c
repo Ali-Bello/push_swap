@@ -77,6 +77,8 @@ int	is_duplicate(char **av)
 	int	j;
 
 	i = 0;
+	if (av && !av[1])
+		ft_safe_atoi(av[i], av);
 	while (av && av[i])
 	{
 		j = i + 1;
