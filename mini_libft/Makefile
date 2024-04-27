@@ -4,7 +4,7 @@ CC = cc
 
 CFLAGS = -Werror -Wextra -Wall
 
-SRCS = ft_putstr_fd.c\
+SRCS = ft_putstr_fd.c ft_strncmp.c\
 	ft_split.c\
 	ft_strjoin.c ft_substr.c ft_strdup.c ft_safe_atoi.c \
 	ft_memcpy.c ft_strlen.c \

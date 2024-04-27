@@ -6,19 +6,19 @@
 /*   By: aderraj <aderraj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 21:52:42 by aderraj           #+#    #+#             */
-/*   Updated: 2024/04/26 14:27:30 by aderraj          ###   ########.fr       */
+/*   Updated: 2024/04/27 23:37:26 by aderraj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
-#define PUSH_SWAP_H
+# define PUSH_SWAP_H
 
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <string.h>
-#include <limits.h>
-#include "../mini_libft/libft.h"
+# include "../mini_libft/libft.h"
+# include <limits.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
+# include <unistd.h>
 
 typedef struct s_info
 {
@@ -32,19 +32,19 @@ typedef struct s_info
 	int	rrb;
 	int	rr;
 	int	rrr;
-} t_info;
+}					t_info;
 
 typedef struct s_node
 {
 	int				value;
 	t_info			info;
 	struct s_node	*next;
-} t_node;
+}					t_node;
 
 void	create_stack(t_node **top, t_info *info);
 void	fill_stack(t_node **top, char **av);
 
-void	push(t_node	**stack_1, t_node **stack_2, t_info *info, char *str);
+void	push(t_node **stack_1, t_node **stack_2, t_info *info, char *str);
 void	swap(t_node **stack, char *str);
 void	rotate(t_node **stack, char *str);
 void	reverse_rotate(t_node **stack, char *str);
@@ -61,9 +61,9 @@ void	reduce_price(t_node **a);
 void	push_to_b(t_node **a, t_node **b, t_info *info);
 void	sort(t_node **a, t_node **b, t_info *info);
 char	**parse(char **av, int *a_len);
-int	is_duplicate(char **av);
+int		is_duplicate(char **av);
 
-int	is_sorted(char **av);
+int		is_sorted(char **av);
 void	free_args(char **args);
 void	free_stack(t_node *stack);
 #endif

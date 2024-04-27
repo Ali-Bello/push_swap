@@ -6,7 +6,7 @@
 /*   By: aderraj <aderraj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 22:57:48 by aderraj           #+#    #+#             */
-/*   Updated: 2024/04/27 06:46:20 by aderraj          ###   ########.fr       */
+/*   Updated: 2024/04/27 23:38:01 by aderraj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 void	find_position(int value, t_node **b, t_info *info)
 {
 	t_node	*tmp;
-	int	i;
-	int	closest;
-	int	idx;
+	int		i;
+	int		closest;
+	int		idx;
 
 	i = 0;
 	closest = INT_MIN;
@@ -42,14 +42,14 @@ void	find_position(int value, t_node **b, t_info *info)
 void	set_a_rotations(int value, t_node **a, t_info *info)
 {
 	t_node	*tmp;
-	int	idx;
+	int		idx;
 
 	tmp = (*a);
 	idx = 0;
 	while (tmp)
 	{
 		if (tmp->value == value)
-			break;
+			break ;
 		idx++;
 		tmp = tmp->next;
 	}
@@ -83,18 +83,17 @@ void	set_cheapest_moves(t_node **a, t_node **b, t_info *info)
 	t_node	*tmp;
 	int		min;
 
-
 	tmp = *a;
 	min = INT_MAX;
 	set_push_price(a, b, info);
 	reduce_price(a);
 	while (tmp)
 	{
-		if (tmp->info.ra + tmp->info.rra + tmp->info.rb
-			+ tmp->info.rrb + tmp->info.rr + tmp->info.rrr < min)
+		if (tmp->info.ra + tmp->info.rra + tmp->info.rb + tmp->info.rrb
+			+ tmp->info.rr + tmp->info.rrr < min)
 		{
-			min = tmp->info.ra + tmp->info.rra + tmp->info.rb
-				+ tmp->info.rrb + tmp->info.rr + tmp->info.rrr;
+			min = tmp->info.ra + tmp->info.rra + tmp->info.rb + tmp->info.rrb
+				+ tmp->info.rr + tmp->info.rrr;
 			info->ra = tmp->info.ra;
 			info->rra = tmp->info.rra;
 			info->rb = tmp->info.rb;
@@ -112,7 +111,6 @@ void	push_to_b(t_node **a, t_node **b, t_info *info)
 		push(a, b, info, "pb\n");
 	if (info->a_len > 4)
 		push(a, b, info, "pb\n");
-
 	while (info->a_len > 3)
 	{
 		set_cheapest_moves(a, b, info);

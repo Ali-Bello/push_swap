@@ -6,7 +6,7 @@
 /*   By: aderraj <aderraj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 23:57:23 by aderraj           #+#    #+#             */
-/*   Updated: 2024/04/27 06:45:42 by aderraj          ###   ########.fr       */
+/*   Updated: 2024/04/27 23:23:30 by aderraj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	bring_to_top(t_node **stack, t_info *info)
 	while (tmp)
 	{
 		if (tmp->value == info->max)
-			break;
+			break ;
 		idx++;
 		tmp = tmp->next;
 	}
@@ -83,7 +83,7 @@ void	apply_moves(t_node **a, t_node **b, t_info *info)
 
 void	reduce_price(t_node **a)
 {
-	t_node *tmp;
+	t_node	*tmp;
 
 	tmp = (*a);
 	while (tmp)

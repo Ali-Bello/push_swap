@@ -6,7 +6,7 @@
 /*   By: aderraj <aderraj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 00:08:08 by aderraj           #+#    #+#             */
-/*   Updated: 2024/04/25 22:22:12 by aderraj          ###   ########.fr       */
+/*   Updated: 2024/04/27 23:43:58 by aderraj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,3 @@ char	*ft_strjoin(char *s1, char *s2)
 	ptr[len + len2] = 0;
 	return (ptr);
 }
-

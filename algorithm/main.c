@@ -1,29 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aderraj <aderraj@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/27 23:23:54 by aderraj           #+#    #+#             */
+/*   Updated: 2024/04/27 23:23:55 by aderraj          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-void	free_args(char **args)
-{
-	int i;
-
-	i = 0;
-	while (args && args[i])
-		free(args[i++]);
-	free(args);
-}
-
-void	free_stack(t_node *stack)
-{
-	t_node	*tmp;
- 
-	tmp = stack;
-	while (stack)
-	{
-		tmp = stack;
-		stack = stack->next;
-		free(tmp);
-	}
-	stack = 0;
-}
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	t_node	*a;
 	t_node	*b;

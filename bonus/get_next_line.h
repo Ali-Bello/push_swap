@@ -1,37 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operations2.c                                      :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aderraj <aderraj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/25 19:53:30 by aderraj           #+#    #+#             */
-/*   Updated: 2024/04/27 06:46:10 by aderraj          ###   ########.fr       */
+/*   Created: 2023/12/08 09:19:39 by aderraj           #+#    #+#             */
+/*   Updated: 2024/04/27 23:39:39 by aderraj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-void	swap(t_node **stack, char *str)
-{
-	t_node	*tmp;
+# include "../mini_libft/libft.h"
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
 
-	if (!*stack)
-		return ;
-	tmp = (*stack)->next;
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 10
+# endif
 
-	(*stack)->next = tmp->next;
-	tmp->next = (*stack);
-	(*stack) = tmp;
+int		line_check(char *str);
+int		read_check(int fd, char **buffer);
 
-	if (str)
-		ft_putstr_fd(str, 1);
-}
+char	*get_next_line(int fd);
 
-void	ss(t_node **a, t_node **b)
-{
-	if (!*a || !*b || !(*a)->next || !(*b)->next)
-		return ;
-	swap(a, NULL);
-	swap(b, NULL);
-}
+char	*line_extract(char **buffer);
+#endif

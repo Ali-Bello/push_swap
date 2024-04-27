@@ -6,13 +6,35 @@
 /*   By: aderraj <aderraj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 02:09:37 by aderraj           #+#    #+#             */
-/*   Updated: 2024/04/27 06:46:23 by aderraj          ###   ########.fr       */
+/*   Updated: 2024/04/27 23:38:20 by aderraj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_node *get_last(t_node *stack)
+void	swap(t_node **stack, char *str)
+{
+	t_node	*tmp;
+
+	if (!*stack || !(*stack)->next)
+		return ;
+	tmp = (*stack)->next;
+	(*stack)->next = tmp->next;
+	tmp->next = (*stack);
+	(*stack) = tmp;
+	if (str)
+		ft_putstr_fd(str, 1);
+}
+
+void	ss(t_node **a, t_node **b)
+{
+	if (!*a || !*b || !(*a)->next || !(*b)->next)
+		return ;
+	swap(a, NULL);
+	swap(b, NULL);
+}
+
+t_node	*get_last(t_node *stack)
 {
 	while (stack && stack->next)
 		stack = stack->next;
@@ -22,7 +44,6 @@ t_node *get_last(t_node *stack)
 void	sort_three(t_node **a, t_info *info)
 {
 	set_min_max(a, info);
-
 	if ((*a)->next->value == info->max)
 		swap(a, "sa\n");
 	if ((*a)->value == info->max)

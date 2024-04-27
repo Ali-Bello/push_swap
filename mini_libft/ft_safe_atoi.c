@@ -6,12 +6,19 @@
 /*   By: aderraj <aderraj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 19:10:10 by aderraj           #+#    #+#             */
-/*   Updated: 2024/04/27 06:53:36 by aderraj          ###   ########.fr       */
+/*   Updated: 2024/04/27 23:43:45 by aderraj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "../algorithm/push_swap.h"
+#include "libft.h"
+
+void	ft_error(char **args)
+{
+	free_args(args);
+	ft_putstr_fd("Error\n", 2);
+	exit(-1);
+}
 
 int	ft_safe_atoi(const char *str, char **args)
 {
@@ -34,12 +41,8 @@ int	ft_safe_atoi(const char *str, char **args)
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		result = result * 10 + (str[i] - '0');
-		if ((sign *result ) > INT_MAX || (sign * result) < INT_MIN)
-		{
-			free_args(args);
-			ft_putstr_fd("Error\n", 2);
-			exit(-1);
-		}
+		if ((sign * result) > INT_MAX || (sign * result) < INT_MIN)
+			ft_error(args);
 		i++;
 	}
 	return ((int)(result * sign));
