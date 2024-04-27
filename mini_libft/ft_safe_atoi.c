@@ -6,12 +6,12 @@
 /*   By: aderraj <aderraj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 19:10:10 by aderraj           #+#    #+#             */
-/*   Updated: 2024/04/26 12:09:24 by aderraj          ###   ########.fr       */
+/*   Updated: 2024/04/27 06:53:36 by aderraj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "../working/push_swap.h"
+#include "../algorithm/push_swap.h"
 
 int	ft_safe_atoi(const char *str, char **args)
 {
