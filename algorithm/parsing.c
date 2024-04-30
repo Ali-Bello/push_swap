@@ -17,18 +17,13 @@ int	is_num(char *str)
 	int	i;
 
 	i = 0;
-	if (!*str)
-		return (0);
 	if (str[i] == '-' || str[i] == '+')
-		i++;
-	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
 		i++;
 	if (!str[i])
 		return (0);
 	while (str[i])
 	{
-		if (!(str[i] >= '0' && str[i] <= '9') && !(str[i] >= 9 && str[i] <= 13)
-			&& (str[i] != ' '))
+		if (!(str[i] >= '0' && str[i] <= '9'))
 			return (0);
 		i++;
 	}
@@ -45,12 +40,6 @@ char	**get_args(char **av, int *a_len)
 	i = 0;
 	while (av[i])
 	{
-		if (!is_num(av[i]))
-		{
-			free(buffer);
-			ft_putstr_fd("Error\n", 2);
-			exit(-1);
-		}
 		tmp = ft_strjoin(ft_strdup(av[i++]), " ");
 		buffer = ft_strjoin(buffer, tmp);
 		free(tmp);
@@ -82,6 +71,8 @@ int	is_duplicate(char **av)
 		ft_safe_atoi(av[i], av);
 	while (av && av[i])
 	{
+		if (!is_num(av[i]))
+			return (1);
 		j = i + 1;
 		while (av[j])
 		{
@@ -99,8 +90,10 @@ char	**parse(char **av, int *a_len)
 	char	**args;
 	int		i;
 
+	if (!*av)
+		return (NULL);
 	args = get_args(av, a_len);
-	if (is_duplicate(args))
+	if (!args || !*args || is_duplicate(args))
 	{
 		i = 0;
 		while (args[i])

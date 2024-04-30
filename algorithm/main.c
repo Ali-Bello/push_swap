@@ -20,7 +20,7 @@ int	main(int ac, char **av)
 	char	**args;
 
 	args = parse(av + 1, &(info.a_len));
-	if (ac < 2 || is_sorted(args))
+	if (!args || ac < 2 || is_sorted(args))
 		return (free_args(args), 0);
 	a = 0;
 	b = 0;

@@ -14,7 +14,7 @@ OBJS = $(SRCS:.c=.o)
 LIBRARY = mini_libft/libft.a
 
 BONUS_SRCS = bonus/checker.c bonus/get_next_line.c algorithm/operations.c\
-	algorithm/parsing.c algorithm/stack.c\
+	algorithm/parsing.c algorithm/stack.c algorithm/sort.c algorithm/helpers.c\
 
 all: $(LIBRARY) $(NAME)
 

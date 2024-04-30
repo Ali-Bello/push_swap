@@ -55,13 +55,15 @@ void	sort_three(t_node **a, t_info *info)
 void	sort(t_node **a, t_node **b, t_info *info)
 {
 	t_node	*last;
+	int		limit;
 
 	sort_three(a, info);
 	init_zero(info);
+	limit = info->a_len;
 	while (info->b_len)
 	{
 		last = get_last(*a);
-		while (last->value > (*b)->value && info->rra < 3)
+		while (last->value > (*b)->value && info->rra < limit)
 		{
 			reverse_rotate(a, "rra\n");
 			info->rra++;
