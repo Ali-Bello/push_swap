@@ -6,7 +6,7 @@
 /*   By: aderraj <aderraj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 23:23:54 by aderraj           #+#    #+#             */
-/*   Updated: 2024/04/27 23:23:55 by aderraj          ###   ########.fr       */
+/*   Updated: 2024/04/30 16:43:42 by aderraj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	main(int ac, char **av)
 	char	**args;
 
 	args = parse(av + 1, &(info.a_len));
-	if (!args || ac < 2 || is_sorted(args))
+	if (ac < 2 || is_sorted(args))
 		return (free_args(args), 0);
 	a = 0;
 	b = 0;

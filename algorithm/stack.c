@@ -6,11 +6,23 @@
 /*   By: aderraj <aderraj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 21:56:05 by aderraj           #+#    #+#             */
-/*   Updated: 2024/04/27 23:38:30 by aderraj          ###   ########.fr       */
+/*   Updated: 2024/04/30 16:56:50 by aderraj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	is_empty(char *str)
+{
+	int	i;
+
+	i = 0;
+	while ((str[i] >= 9 && str[i] <= 13) || str[i] == ' ')
+		i++;
+	if (!str[i])
+		return (1);
+	return (0);
+}
 
 void	free_args(char **args)
 {

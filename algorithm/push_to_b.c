@@ -6,7 +6,7 @@
 /*   By: aderraj <aderraj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 22:57:48 by aderraj           #+#    #+#             */
-/*   Updated: 2024/04/27 23:38:01 by aderraj          ###   ########.fr       */
+/*   Updated: 2024/04/30 15:41:39 by aderraj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ void	find_position(int value, t_node **b, t_info *info)
 {
 	t_node	*tmp;
 	int		i;
-	int		closest;
+	long	closest;
 	int		idx;
 
 	i = 0;
-	closest = INT_MIN;
+	closest = LONG_MIN;
 	idx = 0;
 	tmp = (*b);
 	while (tmp)

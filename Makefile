@@ -36,6 +36,6 @@ re: fclean all
 
 bonus: $(LIBRARY) $(BONUS_NAME)
 
-$(BONUS_NAME): $(BONUS_SRCS) 
+$(BONUS_NAME): $(BONUS_SRCS)
 	$(CC) $(CFLAGS) -o $(BONUS_NAME) $(BONUS_SRCS) -Imini_libft -Ichecker -Lmini_libft -lft
 

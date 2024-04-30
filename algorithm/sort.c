@@ -6,7 +6,7 @@
 /*   By: aderraj <aderraj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 02:09:37 by aderraj           #+#    #+#             */
-/*   Updated: 2024/04/27 23:38:20 by aderraj          ###   ########.fr       */
+/*   Updated: 2024/04/30 13:12:30 by aderraj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,13 @@ void	sort_three(t_node **a, t_info *info)
 void	sort(t_node **a, t_node **b, t_info *info)
 {
 	t_node	*last;
-	int		limit;
 
 	sort_three(a, info);
-	init_zero(info);
-	limit = info->a_len;
+	info->rra = 0;
 	while (info->b_len)
 	{
 		last = get_last(*a);
-		while (last->value > (*b)->value && info->rra < limit)
+		while (last->value > (*b)->value && info->rra < 3)
 		{
 			reverse_rotate(a, "rra\n");
 			info->rra++;
