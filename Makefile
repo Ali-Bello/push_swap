@@ -6,7 +6,7 @@ CC = gcc
 
 CFLAGS = -Wall -Werror -Wextra
 
-SRCS = algorithm/helpers.c algorithm/main.c algorithm/operations.c\
+SRCS = algorithm/helpers.c algorithm/push_swap.c algorithm/operations.c\
 	algorithm/parsing.c algorithm/push_to_b.c algorithm/sort.c algorithm/stack.c
 
 OBJS = $(SRCS:.c=.o)
@@ -19,7 +19,7 @@ BONUS_SRCS = bonus/checker.c bonus/get_next_line.c algorithm/operations.c\
 all: $(LIBRARY) $(NAME)
 
 $(NAME): $(SRCS) $(LIBRARY)
-	$(CC) $(CFLAGS) -o $(NAME) $(SRCS) -Imini_libft -Lmini_libft -lft
+	$(CC) $(CFLAGS) -o $(NAME) $(SRCS) $(LIBRARY)
 
 $(LIBRARY):
 	make -C mini_libft
@@ -37,5 +37,5 @@ re: fclean all
 bonus: $(LIBRARY) $(BONUS_NAME)
 
 $(BONUS_NAME): $(BONUS_SRCS)
-	$(CC) $(CFLAGS) -o $(BONUS_NAME) $(BONUS_SRCS) -Imini_libft -Ichecker -Lmini_libft -lft
+	$(CC) $(CFLAGS) -o $(BONUS_NAME) $(BONUS_SRCS) $(LIBRARY) -Ichecker
 

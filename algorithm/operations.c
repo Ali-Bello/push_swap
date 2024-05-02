@@ -80,7 +80,7 @@ void	push(t_node **stack_1, t_node **stack_2, t_info *info, char *str)
 	(*stack_1) = (*stack_1)->next;
 	tmp->next = (*stack_2);
 	(*stack_2) = tmp;
-	if (str && info && !strcmp(str, "pa\n"))
+	if (str && info && !ft_strncmp(str, "pa\n", 3))
 	{
 		info->a_len++;
 		info->b_len--;
