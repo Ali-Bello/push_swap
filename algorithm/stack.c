@@ -6,7 +6,7 @@
 /*   By: aderraj <aderraj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 21:56:05 by aderraj           #+#    #+#             */
-/*   Updated: 2024/04/30 16:56:50 by aderraj          ###   ########.fr       */
+/*   Updated: 2024/05/01 22:08:25 by aderraj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,10 @@ void	create_stack(t_node **top, t_info *info)
 	{
 		tmp = malloc(sizeof(t_node));
 		if (!tmp)
+		{
+			free_stack(*top);
 			return ;
+		}
 		tmp->next = *top;
 		(*top) = tmp;
 		i++;

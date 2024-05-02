@@ -6,7 +6,7 @@
 /*   By: aderraj <aderraj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 19:54:36 by aderraj           #+#    #+#             */
-/*   Updated: 2024/04/30 16:58:09 by aderraj          ###   ########.fr       */
+/*   Updated: 2024/05/01 22:14:49 by aderraj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,11 @@ char	**get_args(char **av, int *a_len)
 			exit(-1);
 		}
 		tmp = ft_strjoin(ft_strdup(av[i++]), " ");
+		if (!tmp)
+			return (free(tmp), free(buffer), NULL);
 		buffer = ft_strjoin(buffer, tmp);
+		if (!buffer)
+			return (free(tmp), NULL);
 		free(tmp);
 	}
 	return (ft_split(buffer, ' ', a_len));
@@ -94,15 +98,13 @@ int	is_duplicate(char **av)
 char	**parse(char **av, int *a_len)
 {
 	char	**args;
-	int		i;
 
+	if (!*av)
+		return (NULL);
 	args = get_args(av, a_len);
 	if (!*args || is_duplicate(args))
 	{
-		i = 0;
-		while (args[i])
-			free(args[i++]);
-		free(args);
+		free_args(args);
 		ft_putstr_fd("Error\n", 2);
 		exit(-1);
 	}

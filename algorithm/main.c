@@ -6,7 +6,7 @@
 /*   By: aderraj <aderraj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 23:23:54 by aderraj           #+#    #+#             */
-/*   Updated: 2024/04/30 16:43:42 by aderraj          ###   ########.fr       */
+/*   Updated: 2024/05/01 22:16:30 by aderraj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,11 @@ int	main(int ac, char **av)
 	b = 0;
 	info.b_len = 0;
 	create_stack(&a, &info);
+	if (!a)
+		return (free(args), -1);
 	fill_stack(&a, args);
+	free_args(args);
 	push_to_b(&a, &b, &info);
 	sort(&a, &b, &info);
-	free_args(args);
 	free_stack(a);
 }
